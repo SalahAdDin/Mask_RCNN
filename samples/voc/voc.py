@@ -40,7 +40,7 @@ import cv2
 import imgaug
 
 # Root directory of the project
-ROOT_DIR = os.path.abspath("../../")
+ROOT_DIR = os.path.abspath("Mask_RCNN")
 # Inference result directory
 RESULTS_DIR = os.path.abspath("./inference/")
 
@@ -97,6 +97,8 @@ class VocConfig(Config):
     IMAGE_PER_GPU = 2
 
     NUM_CLASSES = 1 + 20 # VOC 2012 have 20 classes. "1" is for background.
+
+    BACKBONE = "resnet50"
 
 class InferenceConfig(VocConfig):
     # Set batch size to 1 since we'll be running inference on
