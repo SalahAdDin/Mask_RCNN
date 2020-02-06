@@ -94,11 +94,13 @@ def voc_label_indices(colormap, colormap2label):
 class VocConfig(Config):
     NAME = "voc"
 
-    IMAGE_PER_GPU = 2
+    IMAGE_PER_GPU = 8
 
     NUM_CLASSES = 1 + 20 # VOC 2012 have 20 classes. "1" is for background.
 
     BACKBONE = "resnet50"
+
+    STEPS_PER_EPOCH = 500
 
 class InferenceConfig(VocConfig):
     # Set batch size to 1 since we'll be running inference on
@@ -398,7 +400,7 @@ if __name__ == '__main__':
         #print("evaluate have not been implemented")
         # Validation dataset
         dataset_val = VocDataset()
-        voc = dataset_val.load_voc(args.dataset, "val", year=args.year)
+        voc = dataset_val.load_voc(args.dataset, "test", year=args.year)
         dataset_val.prepare()
         print("Running voc inference on {} images.".format(args.limit))
         inference(model, dataset_val, int(args.limit))
